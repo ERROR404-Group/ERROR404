@@ -1,4 +1,4 @@
-/* GLOBAL RESET */
+/* global, applied on everything */
 * {
   margin: 0;
   padding: 0;
@@ -6,9 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-html {
-  font-size: 16px;
-}
+html { font-size: 16px; }
 
 body {
   min-height: 100vh;
@@ -19,7 +17,8 @@ body {
   background: linear-gradient(135deg, #dfe9f3, #ffffff);
 }
 
-/* CONTAINER */
+
+/* container layout */
 #app {
   display: flex;
   flex-direction: column;
@@ -33,14 +32,15 @@ body {
 .container {
   width: 95%;
   background: #d4ebd4;
-  border-radius: 1.25rem;
+  border-radius: 20px;
   padding: 1.25rem;
   text-align: center;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
 
-/* HEADER */
+
+/* header */
 header {
   display: flex;
   justify-content: space-between;
@@ -64,16 +64,61 @@ header h1 {
   font-size: 1.5rem;
 }
 
-/* TABLE SECTION */
+
+/* rfid list layout */
+.rfid-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.rfid-list {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  width: 230px;
+  min-width: 200px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.rfid-list h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.rfid-list ul {
+  list-style: none;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.rfid-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+
+/* table */
 .table-container {
-  overflow-x: auto;
   width: 100%;
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background: white;
   border-radius: 6px;
   overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
@@ -91,21 +136,24 @@ th {
   font-weight: 600;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-tbody tr:hover {
-  background-color: #f0f0f0;
-}
+tbody tr:nth-child(even)  { background: #fafafa; }
+tbody tr:hover            { background: #f0f0f0; }
 
 .no-result {
   padding: 1rem;
   font-style: italic;
-  color: #777;
+  color: #666;
+  text-align: center;
 }
 
-/* SWITCH */
+
+/* status */
+.active-status   { color: green; font-weight: bold; }
+.inactive-status { color: darkgrey; font-weight: bold; }
+.notfound-status { color: red; font-weight: bold; }
+
+
+/* for the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -122,92 +170,29 @@ tbody tr:hover {
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
+  inset: 0;
+  background: #ccc;
   border-radius: 18px;
   transition: 0.3s;
 }
 
 .slider:before {
-  position: absolute;
   content: "";
-  height: 14px;
-  width: 14px;
+  position: absolute;
   left: 2px;
   bottom: 2px;
-  background-color: white;
+  width: 14px;
+  height: 14px;
+  background: white;
   border-radius: 50%;
   transition: 0.3s;
 }
 
-input:checked + .slider {
-  background-color: #4CAF50;
-}
+input:checked + .slider       { background: #4CAF50; }
+input:checked + .slider:before { transform: translateX(17px); }
 
-input:checked + .slider:before {
-  transform: translateX(17px);
-}
 
-/* STATUS COLORS */
-.active-status {
-  color: green;
-  font-weight: 600;
-}
-
-.inactive-status {
-  color: red;
-  font-weight: 600;
-}
-
-/* RFID Layout */
-.rfid-layout {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.rfid-list {
-  background-color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  width: 230px;
-  min-width: 200px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  font-family: 'Segoe UI', sans-serif;
-  flex-shrink: 0;
-}
-
-.rfid-list h3 {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 6px;
-}
-
-.rfid-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 350px;
-  overflow-y: auto;
-}
-
-.rfid-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-/* Toast message */
+/* toast popup message */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -222,33 +207,20 @@ input:checked + .slider:before {
   gap: 6px;
 }
 
-/* RESPONSIVE DESIGN */
 
-/* Tablets (≤ 992px) */
+/* for responsiveness on mobile etc. */
+
 @media (max-width: 992px) {
   html { font-size: 15px; }
-  .container { padding: 1rem; }
-  .rfid-layout {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-  .rfid-list {
-    width: 220px;
-  }
+  .rfid-list { width: 220px; }
 }
 
-/* Medium devices (≤ 768px) */
 @media (max-width: 768px) {
   html { font-size: 14px; }
 
   header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  header h1 {
-    font-size: 1.3rem;
   }
 
   .rfid-layout {
@@ -261,68 +233,26 @@ input:checked + .slider:before {
     max-width: 400px;
   }
 
-  .table-container {
-    width: 100%;
-  }
-
   table th, table td {
     font-size: 0.9rem;
-    padding: 0.6rem;
   }
 }
 
-/* Small Phones (≤ 480px) */
 @media (max-width: 480px) {
   html { font-size: 13px; }
 
   header {
-    flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  header h1 {
-    font-size: 1.1rem;
-  }
-
-  .rfid-list {
-    width: 100%;
-    padding: 12px;
-  }
-
   table th, table td {
     font-size: 0.8rem;
-    padding: 0.5rem;
   }
 
   .toast {
-    bottom: 1rem;
     right: 50%;
+    bottom: 1rem;
     transform: translateX(50%);
-    font-size: 0.85rem;
   }
-}
-
-.notfound-status {
-  color: #e74c3c;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.active-status {
-  color: green;
-  font-weight: bold;
-}
-.inactive-status {
-  color: darkgrey;
-  font-weight: bold;
-}
-.notfound-status {
-  color: red;
-  font-weight: bold;
-}
-.no-result {
-  text-align: center;
-  font-style: italic;
-  color: #666;
 }
